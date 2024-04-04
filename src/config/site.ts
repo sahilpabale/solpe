@@ -1,11 +1,11 @@
 export const siteConfig = {
-  name: "sendo",
+  name: "solpe",
   url: "https://sendo.fun",
   ogImage: "",
   description: "todo",
   links: {
-    twitter: "https://twitter.com/AnishDe12020",
-    github: "https://github.com/AnishDe12020/sendo",
+    twitter: "https://twitter.com/sahilpabale",
+    github: "https://github.com/sahilpabale/solpe",
   },
 };
 

@@ -1,10 +1,6 @@
 import ClaimLinkCard from "@/components/ClaimLinkCard";
-import { Icons } from "@/components/icons";
-import { Button } from "@/components/ui/button";
-import useWeb3Auth from "@/hooks/useWeb3Auth";
 import { prisma } from "@/lib/db";
 import { SUPPORTED_SPL_TOKENS, TOKEN_SOL } from "@/lib/tokens";
-import { WalletIcon } from "lucide-react";
 
 interface ClaimPageProps {
   params: {

@@ -1,4 +1,4 @@
-# Sendo Proof-of-concept
+# SolPe Proof-of-concept
 
 This is an open-source proof of concept of a [Tiplink](https://tiplink.io) alternative for distributing crypto assets via a simple link that can be shared with anyone even if you don't know their wallet address or they don't have a wallet.
 

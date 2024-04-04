@@ -70,12 +70,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }
 
       const keypair = Keypair.fromSecretKey(
-        base58.decode(process.env.PRIVATE_KEY as string)
+        base58.decode(process.env.PRIVATE_KEY as string),
       );
 
       const connection = new Connection(
         process.env.NEXT_PUBLIC_MAINNET_RPC as string,
-        "confirmed"
+        "confirmed",
       );
 
       let transferSig: string;
@@ -86,7 +86,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             fromPubkey: keypair.publicKey,
             toPubkey: new PublicKey(claimerAddress),
             lamports: link.amount * 1000000000,
-          })
+          }),
         );
 
         transferSig = await sendAndConfirmTransaction(
@@ -95,19 +95,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           [keypair],
           {
             commitment: "processed",
-          }
+          },
         );
       } else {
         const vaultATA = getAssociatedTokenAddressSync(
           new PublicKey(link.mint as string),
-          keypair.publicKey
+          keypair.publicKey,
         );
 
         const userATA = await getOrCreateAssociatedTokenAccount(
           connection,
           keypair,
           new PublicKey(link.mint as string),
-          new PublicKey(claimerAddress)
+          new PublicKey(claimerAddress),
         );
 
         if (!userATA || !vaultATA) {
@@ -124,8 +124,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             userATA.address,
             keypair.publicKey,
             link.amount * 10 ** (link.decimals as number),
-            link.decimals as number
-          )
+            link.decimals as number,
+          ),
         );
 
         transferSig = await sendAndConfirmTransaction(
@@ -134,7 +134,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           [keypair],
           {
             commitment: "processed",
-          }
+          },
         );
       }
 
@@ -206,12 +206,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }
 
       const keypair = Keypair.fromSecretKey(
-        base58.decode(process.env.PRIVATE_KEY as string)
+        base58.decode(process.env.PRIVATE_KEY as string),
       );
 
       const connection = new Connection(
         process.env.NEXT_PUBLIC_MAINNET_RPC as string,
-        "confirmed"
+        "confirmed",
       );
 
       let returnSig: string;
@@ -222,7 +222,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             fromPubkey: keypair.publicKey,
             toPubkey: new PublicKey(link.createdBy.address),
             lamports: link.amount * 1000000000,
-          })
+          }),
         );
 
         returnSig = await sendAndConfirmTransaction(connection, tx, [keypair], {
@@ -231,12 +231,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       } else {
         const userATA = getAssociatedTokenAddressSync(
           new PublicKey(link.mint as string),
-          new PublicKey(link.createdBy.address)
+          new PublicKey(link.createdBy.address),
         );
 
         const vaultATA = getAssociatedTokenAddressSync(
           new PublicKey(link.mint as string),
-          keypair.publicKey
+          keypair.publicKey,
         );
 
         if (!userATA || !vaultATA) {
@@ -253,8 +253,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             userATA,
             keypair.publicKey,
             link.amount * 10 ** (link.decimals as number),
-            link.decimals as number
-          )
+            link.decimals as number,
+          ),
         );
 
         returnSig = await sendAndConfirmTransaction(connection, tx, [keypair], {

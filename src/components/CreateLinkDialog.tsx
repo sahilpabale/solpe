@@ -63,7 +63,7 @@ const createLinkFormResolver = zodResolver(
       message: z.string().optional(),
       type: z.string(),
     })
-    .required()
+    .required(),
 );
 
 const CreateLinkDialog = () => {
@@ -120,11 +120,11 @@ const CreateLinkDialog = () => {
 
         const userATA = getAssociatedTokenAddressSync(
           new PublicKey(splToken.address),
-          publicKey
+          publicKey,
         );
         const valutATA = getAssociatedTokenAddressSync(
           new PublicKey(splToken.address),
-          new PublicKey(vaultPublicKey)
+          new PublicKey(vaultPublicKey),
         );
 
         const depositTx = new Transaction().add(
@@ -134,8 +134,8 @@ const CreateLinkDialog = () => {
             valutATA,
             publicKey,
             data.amount * 10 ** splToken.decimals,
-            splToken.decimals
-          )
+            splToken.decimals,
+          ),
         );
 
         const latestBlockhash = await connection.getLatestBlockhash();
@@ -148,7 +148,7 @@ const CreateLinkDialog = () => {
             blockhash: latestBlockhash.blockhash,
             lastValidBlockHeight: latestBlockhash.lastValidBlockHeight,
           },
-          "confirmed"
+          "confirmed",
         );
 
         await sleep(5000);
@@ -173,7 +173,7 @@ const CreateLinkDialog = () => {
             fromPubkey: publicKey,
             toPubkey: new PublicKey(vaultPublicKey),
             lamports: data.amount * LAMPORTS_PER_SOL,
-          })
+          }),
         );
 
         const latestBlockhash = await connection.getLatestBlockhash();
@@ -186,7 +186,7 @@ const CreateLinkDialog = () => {
             blockhash: latestBlockhash.blockhash,
             lastValidBlockHeight: latestBlockhash.lastValidBlockHeight,
           },
-          "processed"
+          "processed",
         );
 
         const res = await axios.post("/api/links", {
@@ -209,7 +209,7 @@ const CreateLinkDialog = () => {
           onClick: () => {
             window.open(
               `https://explorer.solana.com/tx/${depositTxSig}`,
-              "_blank"
+              "_blank",
             );
           },
         },

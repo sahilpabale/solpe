@@ -3,7 +3,7 @@
 import { WalletIcon } from "lucide-react";
 import { Icons } from "./icons";
 import { Button } from "./ui/button";
-import { Link } from "@prisma/client";
+
 import useWeb3Auth from "@/hooks/useWeb3Auth";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useState } from "react";
@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation";
 import * as Sentry from "@sentry/nextjs";
 
 interface ClaimLinkCardProps {
-  link: Link;
+  link: any;
 }
 
 enum Status {
@@ -41,6 +41,8 @@ const ClaimLinkCard = ({ link }: ClaimLinkCardProps) => {
       const { data } = await axios.post(`/api/links/${link.id}`, {
         claimerAddress,
       });
+
+      console.log(data);
 
       if (!data.success) {
         Sentry.captureException(data);
@@ -99,7 +101,7 @@ const ClaimLinkCard = ({ link }: ClaimLinkCardProps) => {
     <div className="flex flex-col max-w-xl gap-4 p-4 mt-8 bg-secondary rounded-xl">
       {status === Status.IDLE && (
         <>
-          <Button
+          {/* <Button
             onClick={handleWeb3AuthClaim}
             className="text-black bg-white hover:bg-gray-200"
             isLoading={!web3auth}
@@ -113,7 +115,7 @@ const ClaimLinkCard = ({ link }: ClaimLinkCardProps) => {
           </Button>
           <p className="text-xs">
             Ideal for new users who directly want to claim the assets
-          </p>
+          </p> */}
 
           <div className="flex flex-row items-center justify-center gap-4">
             <div className="w-1/2 h-px bg-gray-300"></div>
@@ -177,7 +179,10 @@ const ClaimLinkCard = ({ link }: ClaimLinkCardProps) => {
 
           <Button
             onClick={() => {
-              window.open(`https://solscan.io/tx/${claimSignature}`, "_blank");
+              window.open(
+                `https://solscan.io/tx/${claimSignature}?cluster=devnet`,
+                "_blank",
+              );
             }}
             className="bg-green-700 hover:bg-green-800"
           >

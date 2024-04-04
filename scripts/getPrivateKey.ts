@@ -7,7 +7,7 @@ import bs58 from "bs58";
 
 const privateKey = process.env.KEYPAIR;
 const keypair: Keypair = Keypair.fromSecretKey(
-  new Uint8Array(JSON.parse(privateKey as string))
+  new Uint8Array(JSON.parse(privateKey as string)),
 );
 
 console.log("publicKey", keypair.publicKey);

@@ -19,7 +19,7 @@ const Web3AuthProvider = ({ children }: Web3AuthProviderProps) => {
       try {
         const web3auth = new Web3AuthCore({
           clientId: process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID as string,
-          web3AuthNetwork: "mainnet",
+          web3AuthNetwork: "development",
           chainConfig: {
             chainNamespace: CHAIN_NAMESPACES.SOLANA,
             chainId: "0x1",
@@ -30,7 +30,7 @@ const Web3AuthProvider = ({ children }: Web3AuthProviderProps) => {
         const openloginAdapter = new OpenloginAdapter({
           adapterSettings: {
             whiteLabel: {
-              name: "Sendo",
+              name: "SolPe",
               logoLight: "https://web3auth.io/images/w3a-L-Favicon-1.svg",
               logoDark: "https://web3auth.io/images/w3a-D-Favicon-1.svg",
               defaultLanguage: "en",
